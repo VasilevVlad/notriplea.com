@@ -1,5 +1,8 @@
 {
-  "effective": { "en": "7 October 2026", "ru": "7 октября 2026 г." },
+  "effective": {
+    "en": "7 October 2026",
+    "ru": "7 октября 2026 г."
+  },
   "email": "contact@notriplea.com",
   "games": [
     {
@@ -12,7 +15,10 @@
       "analytics": "full",
       "notifications": true,
       "rating": true,
-      "share": false
+      "share": false,
+      "tagline": "Viking action RPG",
+      "googlePlay": null,
+      "appStore": "https://apps.apple.com/app/id6754191922"
     },
     {
       "slug": "glory-ages-samurais",
@@ -24,7 +30,10 @@
       "analytics": "full",
       "notifications": true,
       "rating": true,
-      "share": false
+      "share": false,
+      "tagline": "Samurai action RPG",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.lalapp.gloryagessamurais",
+      "appStore": "https://apps.apple.com/app/id1440521281"
     },
     {
       "slug": "slash-of-sword-2",
@@ -36,7 +45,10 @@
       "analytics": "full",
       "notifications": true,
       "rating": false,
-      "share": true
+      "share": true,
+      "tagline": "Offline action RPG",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.Notriplea.SlashOfSwordRebelliousJousting",
+      "appStore": "https://apps.apple.com/app/id1526820470"
     },
     {
       "slug": "a-way-to-smash",
@@ -48,7 +60,10 @@
       "analytics": "full",
       "notifications": true,
       "rating": true,
-      "share": false
+      "share": false,
+      "tagline": "Tactical fight",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.notriplea.awaytosmash",
+      "appStore": "https://apps.apple.com/app/id6447623271"
     },
     {
       "slug": "a-way-to-slay",
@@ -60,19 +75,25 @@
       "analytics": "purchases",
       "notifications": false,
       "rating": false,
-      "share": false
+      "share": false,
+      "tagline": "Tactical puzzle fight",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.lalapp.waytoslay",
+      "appStore": "https://apps.apple.com/app/id1416226967"
     },
     {
       "slug": "slash-of-sword",
       "name": "Slash of Sword",
       "android": "com.lalapp.slashofsword",
-      "ios": "",
+      "ios": "com.lalapp.slashofsword",
       "yandexAds": true,
       "playGames": true,
       "analytics": "purchases",
       "notifications": false,
       "rating": true,
-      "share": false
+      "share": false,
+      "tagline": "Arena fighting",
+      "googlePlay": "https://play.google.com/store/apps/details?id=com.lalapp.slashofsword",
+      "appStore": "https://apps.apple.com/app/id1349721463"
     }
   ]
 }

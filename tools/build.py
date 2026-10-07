@@ -234,8 +234,30 @@ def text_ru(g):
 
 
 # ---------------------------------------------------------------- страницы
+# ---------------------------------------------------------------- страницы
 
-def page(lang, title, desc, nav, body):
+SITE = "https://notriplea.com"
+
+ICON_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.6 1.8c-.3.3-.5.8-.5 1.4v17.6c0 .6.2 1.1.5 1.4l.1.1L13.5 12v-.2L3.7 1.7l-.1.1zm13.2 13.5L13.5 12v-.2l3.3-3.3.1.1 3.9 2.2c1.1.6 1.1 1.7 0 2.3l-3.9 2.2h-.1zm-.1.1L13.5 12 3.6 21.9c.4.4 1 .4 1.7.1l11.4-6.6M16.7 8.6 5.3 2c-.7-.4-1.3-.3-1.7.1l9.9 9.9 3.2-3.4z"/></svg>'
+ICON_APPLE = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.5 2-3.6 2.1-3.7-1.2-1.7-3-1.9-3.6-2-1.5-.2-3 .9-3.8.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.1 2.5-1.8 3.1-.5 7.6 1.3 10.1.8 1.2 1.8 2.6 3.1 2.5 1.3-.1 1.7-.8 3.3-.8 1.5 0 1.9.8 3.3.8 1.4 0 2.2-1.2 3-2.5 1-1.4 1.4-2.8 1.4-2.8s-2.7-1-2.7-4.1zM14 5.2c.7-.8 1.2-2 1-3.2-1 0-2.2.7-2.9 1.5-.6.7-1.2 1.9-1 3.1 1.1.1 2.2-.6 2.9-1.4z"/></svg>'
+
+FAVICON = "data:image/svg+xml," + (
+    "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E"
+    "%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E"
+    "%3Cstop offset='0' stop-color='%23f97316'/%3E%3Cstop offset='1' stop-color='%23dc2626'/%3E"
+    "%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E"
+    "%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='900' "
+    "text-anchor='middle' fill='white'%3EN%3C/text%3E%3C/svg%3E")
+
+
+def topbar(nav):
+    return f"""<header class="topbar"><div class="inner">
+  <a class="brand" href="/"><span class="mark">N</span>NoTriple-A Games</a>
+  <nav>{nav}</nav>
+</div></header>"""
+
+
+def page(lang, title, desc, nav, body, url, image="/assets/icons/glory-ages-vikings.jpg"):
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -243,19 +265,26 @@ def page(lang, title, desc, nav, body):
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title>
 <meta name="description" content="{desc}">
+<meta name="theme-color" content="#0c0a09">
+<link rel="canonical" href="{SITE}{url}">
+<link rel="icon" href="{FAVICON}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NoTriple-A Games">
+<meta property="og:title" content="{title}">
+<meta property="og:description" content="{desc}">
+<meta property="og:url" content="{SITE}{url}">
+<meta property="og:image" content="{SITE}{image}">
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-<main>
-<header class="site">
-  <a class="brand" href="/">NoTriple-A Games</a>
-  {nav}
-</header>
+{topbar(nav)}
 
 {body}
 
-<footer>© NoTriple-A Games · <a href="/">notriplea.com</a></footer>
-</main>
+<footer class="site">
+  <span>© NoTriple-A Games</span>
+  <span><a href="mailto:{EMAIL}">{EMAIL}</a></span>
+</footer>
 </body>
 </html>
 """
@@ -269,44 +298,88 @@ def write(rel, content):
     print("  ", rel)
 
 
+def store_buttons(g):
+    b = []
+    if g.get("googlePlay"):
+        b.append(f'<a class="store" href="{g["googlePlay"]}" target="_blank" rel="noopener">{ICON_PLAY}Google Play</a>')
+    else:
+        b.append(f'<span class="store soon">{ICON_PLAY}Google Play — soon</span>')
+    if g.get("appStore"):
+        b.append(f'<a class="store" href="{g["appStore"]}" target="_blank" rel="noopener">{ICON_APPLE}App Store</a>')
+    return "\n      ".join(b)
+
+
 def build():
     eff = CFG["effective"]
     for g in CFG["games"]:
         name = html.escape(g["name"])
+        icon = f"/assets/icons/{g['slug']}.jpg"
         en_url = f"/{g['slug']}/privacy/"
         ru_url = f"/{g['slug']}/privacy/ru/"
+        chip = f'<div class="game-chip"><img src="{icon}" alt="" width="56" height="56"><div><strong>{name}</strong><br><span class="meta">{html.escape(g["tagline"])}</span></div></div>'
         write(f"{g['slug']}/privacy/index.html", page(
             "en", f"Privacy Policy — {name}",
             f"Privacy Policy of the mobile game {name} by NoTriple-A Games.",
-            f'<nav class="lang"><strong>English</strong> <a href="{ru_url}">Русский</a></nav>',
-            f'<h1>Privacy Policy — {name}</h1>\n<p class="meta">Effective date: {eff["en"]}</p>\n\n' + text_en(g)))
+            f'<strong>English</strong> <a href="{ru_url}">Русский</a>',
+            f'<main class="doc">\n{chip}\n<h1>Privacy Policy</h1>\n<p class="meta">Effective date: {eff["en"]}</p>\n\n' + text_en(g) + "\n</main>",
+            en_url, icon))
         write(f"{g['slug']}/privacy/ru/index.html", page(
             "ru", f"Политика конфиденциальности — {name}",
             f"Политика конфиденциальности мобильной игры {name} от NoTriple-A Games.",
-            f'<nav class="lang"><a href="{en_url}">English</a> <strong>Русский</strong></nav>',
-            f'<h1>Политика конфиденциальности — {name}</h1>\n<p class="meta">Дата вступления в силу: {eff["ru"]}</p>\n\n' + text_ru(g)))
+            f'<a href="{en_url}">English</a> <strong>Русский</strong>',
+            f'<main class="doc">\n{chip}\n<h1>Политика конфиденциальности</h1>\n<p class="meta">Дата вступления в силу: {eff["ru"]}</p>\n\n' + text_ru(g) + "\n</main>",
+            ru_url, icon))
 
-    items = []
+    cards, mosaic = [], []
     for g in CFG["games"]:
         name = html.escape(g["name"])
-        store = f'<a href="https://play.google.com/store/apps/details?id={g["android"]}">Google Play</a> · ' if g["android"] else ""
-        items.append(f"""  <li>
-    <strong>{name}</strong>
-    {store}<a href="/{g['slug']}/privacy/">Privacy Policy</a> ·
-    <a href="/{g['slug']}/privacy/ru/">Политика конфиденциальности</a>
+        icon = f"/assets/icons/{g['slug']}.jpg"
+        cards.append(f"""  <li class="game">
+    <div class="head">
+      <img class="icon" src="{icon}" alt="{name} icon" width="88" height="88" loading="lazy">
+      <div><h3>{name}</h3><p class="tag">{html.escape(g["tagline"])}</p></div>
+    </div>
+    <div class="stores">
+      {store_buttons(g)}
+    </div>
+    <div class="legal">Privacy Policy: <a href="/{g['slug']}/privacy/">English</a> · <a href="/{g['slug']}/privacy/ru/">Русский</a></div>
   </li>""")
-    body = f"""<h1>NoTriple-A Games</h1>
-<p class="meta">Mobile games for Android and iOS.</p>
+    for _ in range(4):
+        mosaic += [f'<img src="/assets/icons/{g["slug"]}.jpg" alt="">' for g in CFG["games"]]
 
-<ul class="games">
-{chr(10).join(items)}
-</ul>
+    body = f"""<section class="hero">
+  <div class="mosaic" aria-hidden="true">{"".join(mosaic)}</div>
+  <div class="content">
+    <p class="eyebrow">Indie mobile games studio</p>
+    <h1>Brutal fights.<br><span>Epic heroes.</span></h1>
+    <p class="lead">NoTriple-A Games makes action RPGs and tactical fighting games for Android and iOS — Vikings, samurai, swords and smashing.</p>
+    <a class="btn" href="#games">Our games</a>
+    <a class="btn ghost" href="#contact">Contact</a>
+  </div>
+</section>
 
-<h2>Contact</h2>
-<p>{mail()} ·
-  <a href="https://t.me/NoTripleA">Telegram</a> ·
-  <a href="https://www.instagram.com/notriplea/">Instagram</a></p>"""
-    write("index.html", page("en", "NoTriple-A Games", "NoTriple-A Games — mobile games for Android and iOS.", "", body))
+<section class="section" id="games">
+  <h2>Our games</h2>
+  <p class="sub">Free to play on Google Play and the App Store.</p>
+  <ul class="games">
+{chr(10).join(cards)}
+  </ul>
+</section>
+
+<section class="contact" id="contact">
+  <div class="section">
+    <h2>Contact</h2>
+    <p class="sub">Support, privacy requests and business inquiries.</p>
+    <div class="links">
+      <a class="btn" href="mailto:{EMAIL}">{EMAIL}</a>
+      <a class="btn ghost" href="https://t.me/NoTripleA" target="_blank" rel="noopener">Telegram</a>
+      <a class="btn ghost" href="https://www.instagram.com/notriplea/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</section>"""
+    write("index.html", page("en", "NoTriple-A Games — mobile action games",
+                             "NoTriple-A Games: action RPGs and tactical fighting games for Android and iOS.",
+                             '<a href="/#games">Games</a> <a href="/#contact">Contact</a>', body, "/"))
 
 
 if __name__ == "__main__":
