@@ -141,7 +141,7 @@ footer.site a { color: var(--muted); }
 }
 
 /* ---------- логотип и языки ---------- */
-.brand .logo { height: 34px; width: auto; }
+.brand .logo { height: 40px; width: auto; }
 .topbar nav { align-items: center; }
 .topbar .lang { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 700; }
 .topbar .lang a, .topbar .lang strong { padding: 3px 9px; border-radius: 999px; }
