@@ -29,7 +29,7 @@ def text_en(g):
 <p><strong>In short.</strong> We do not ask for your name, email or phone number, and we never see your payment card. The game uses services from Google, Apple, Unity and Yandex to show ads, measure {"how the game is played" if g["analytics"] == "full" else "purchases and ad revenue"}, process purchases and keep your progress in the cloud. These services receive device identifiers and technical data. You can limit personalized ads at any time, and you can ask us to delete your data.</p>
 </div>""")
     s.append(f"""<h2>1. Who we are</h2>
-<p>This policy applies to the mobile game <strong>{name}</strong> (the “Game”) for Android and iOS, published by <strong>NoTriple-A Games</strong> (“we”, “us”). We are responsible for the data processed by the Game. Contact: {mail()}.</p>""")
+<p>This policy applies to the mobile game <strong>{name}</strong> (the “Game”) for Android and iOS, published by <strong>NoTriple-A Games</strong> — the trade name of individual entrepreneur <strong>Vladislav Vasilev</strong> (“we”, “us”). We are responsible for the data processed by the Game. Contact: {mail()}.</p>""")
 
     s.append("<h2>2. What data is processed</h2>")
     if g["playGames"]:
@@ -125,7 +125,7 @@ def text_en(g):
 <p>We may update this policy when the Game changes. The new version is published on this page with a new effective date. If the changes are significant, we will also announce them in the Game or in its store listing.</p>
 
 <h2>12. Contact</h2>
-<p>NoTriple-A Games — {mail()}</p>""")
+<p>NoTriple-A Games (Vladislav Vasilev, individual entrepreneur) — {mail()}</p>""")
     return "\n\n".join(s)
 
 
@@ -138,7 +138,7 @@ def text_ru(g):
 <p><strong>Коротко.</strong> Мы не спрашиваем ваше имя, почту или телефон и никогда не видим данные банковской карты. Игра использует сервисы Google, Apple, Unity и Яндекса, чтобы показывать рекламу, {"понимать, как играют в игру" if g["analytics"] == "full" else "учитывать покупки и доход от рекламы"}, проводить покупки и хранить прогресс в облаке. Эти сервисы получают идентификаторы устройства и технические данные. Вы можете в любой момент ограничить персонализированную рекламу и попросить нас удалить ваши данные.</p>
 </div>""")
     s.append(f"""<h2>1. Кто мы</h2>
-<p>Политика действует для мобильной игры <strong>{name}</strong> («Игра») для Android и iOS, издатель — <strong>NoTriple-A Games</strong> («мы»). Мы отвечаем за данные, которые обрабатывает Игра. Связь: {mail()}.</p>""")
+<p>Политика действует для мобильной игры <strong>{name}</strong> («Игра») для Android и iOS, издатель — <strong>NoTriple-A Games</strong>, торговое название индивидуального предпринимателя <strong>Владислава Васильева</strong> («мы»). Мы отвечаем за данные, которые обрабатывает Игра. Связь: {mail()}.</p>""")
 
     s.append("<h2>2. Какие данные обрабатываются</h2>")
     if g["playGames"]:
@@ -233,7 +233,7 @@ def text_ru(g):
 <p>Мы можем обновлять политику при изменениях в Игре. Новая версия публикуется на этой странице с новой датой. О существенных изменениях мы также сообщим в Игре или на её странице в магазине.</p>
 
 <h2>12. Контакты</h2>
-<p>NoTriple-A Games — {mail()}</p>""")
+<p>NoTriple-A Games (ИП Владислав Васильев) — {mail()}</p>""")
     return "\n\n".join(s)
 
 
