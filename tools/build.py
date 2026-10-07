@@ -250,6 +250,8 @@ FAVICON = "data:image/svg+xml," + (
     "text-anchor='middle' fill='white'%3EN%3C/text%3E%3C/svg%3E")
 
 
+import hashlib
+VER = hashlib.md5(open(os.path.join(ROOT, "style.css"), "rb").read() + open(os.path.join(ROOT, "assets/logo.png"), "rb").read()).hexdigest()[:8]
 LOGO = "assets/logo.png"  # если файл есть — в шапке логотип вместо буквы N
 
 UI = {
@@ -257,7 +259,7 @@ UI = {
         "home": "/", "games": "Games", "contact": "Contact",
         "eyebrow": "Indie mobile games studio",
         "h1": "Brutal fights.<br><span>Epic heroes.</span>",
-        "lead": "We’re a small indie team making the games we love to play ourselves: Viking sagas, samurai duels and fights where every hit counts. Easy to pick up on your phone — hard to put down.",
+        "lead": "We’re a small indie team making games with a focus on atmosphere and combat. We want every hit to feel heavy and every fight to stay with you — whether it’s a Viking saga or a samurai duel. Beautiful, honest action that’s always in your pocket.",
         "btn_games": "Our games", "btn_contact": "Get in touch",
         "games_h": "Our games", "games_sub": "Free to play on Google Play and the App Store.",
         "privacy": "Privacy Policy", "soon": "soon",
@@ -270,7 +272,7 @@ UI = {
         "home": "/ru/", "games": "Игры", "contact": "Контакты",
         "eyebrow": "Инди-студия мобильных игр",
         "h1": "Жёсткие бои.<br><span>Эпичные герои.</span>",
-        "lead": "Мы — небольшая инди-команда и делаем игры, в которые сами любим играть: саги о викингах, самурайские дуэли и бои, где важен каждый удар. Начать легко, оторваться — сложно.",
+        "lead": "Мы — небольшая инди-команда и делаем игры с упором на атмосферу и боевую систему. Хотим, чтобы каждый удар ощущался, а каждый бой запоминался — будь то сага о викингах или самурайская дуэль. Красивый и честный экшен, который всегда под рукой.",
         "btn_games": "Наши игры", "btn_contact": "Написать нам",
         "games_h": "Наши игры", "games_sub": "Бесплатно в Google Play и App Store.",
         "privacy": "Политика конфиденциальности", "soon": "скоро",
@@ -297,7 +299,7 @@ LANG_JS = """<script>
 
 def brand():
     if os.path.exists(os.path.join(ROOT, LOGO)):
-        return f'<img class="logo" src="/{LOGO}" alt="NoTriple-A Games">'
+        return f'<img class="logo" src="/{LOGO}?v={VER}" alt="NoTriple-A Games" width="69" height="30">'
     return '<span class="mark">N</span>NoTriple-A Games'
 
 
@@ -333,7 +335,7 @@ def page(lang, title, desc, nav, body, url, alt_urls, image="/assets/icons/glory
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="{SITE}{url}">
 <meta property="og:image" content="{SITE}{image}">
-<link rel="stylesheet" href="/style.css">
+<link rel="stylesheet" href="/style.css?v={VER}">
 </head>
 <body>
 {topbar(UI[lang]["home"], nav)}
