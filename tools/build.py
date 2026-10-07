@@ -258,8 +258,8 @@ UI = {
     "en": {
         "home": "/", "games": "Games", "contact": "Contact",
         "eyebrow": "Indie mobile games studio",
-        "h1": "NoTriple-A <span>Games</span>",
-        "lead": "We’re a small indie team making games with a focus on atmosphere and combat. We spend a lot of time on animations, sound and the feel of every hit — until fighting is fun for us, too.",
+        "h1": "NoTriple-A Games",
+        "lead": "We’re a small indie team developing games with a focus on atmosphere and combat. We aim for the quality of PC and console games — but in the world of mobile.",
         "btn_games": "Our games", "btn_contact": "Get in touch",
         "games_h": "Our games", "games_sub": "Free to play on Google Play and the App Store.",
         "privacy": "Privacy Policy", "soon": "soon",
@@ -271,8 +271,8 @@ UI = {
     "ru": {
         "home": "/ru/", "games": "Игры", "contact": "Контакты",
         "eyebrow": "Инди-студия мобильных игр",
-        "h1": "NoTriple-A <span>Games</span>",
-        "lead": "Мы — небольшая инди-команда и делаем игры с упором на атмосферу и боевую систему. Подолгу возимся с анимациями, звуком и ощущением удара — пока драться не станет интересно нам самим.",
+        "h1": "NoTriple-A Games",
+        "lead": "Мы — небольшая инди-команда и разрабатываем игры с упором на атмосферу и боевую систему, стремясь к качеству уровня ПК и консольного гейминга — но в мире мобильного геймдева.",
         "btn_games": "Наши игры", "btn_contact": "Написать нам",
         "games_h": "Наши игры", "games_sub": "Бесплатно в Google Play и App Store.",
         "privacy": "Политика конфиденциальности", "soon": "скоро",
