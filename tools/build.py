@@ -71,6 +71,8 @@ def text_en(g):
         t = t[0].upper() + t[1:]
         s.append(f"<h3>2.{n}. {t}</h3>\n<p>{' '.join(other)}</p>")
 
+    s.append(f"""<h3>2.{7 if other else 6}. Earlier versions of the Game</h3>
+<p>Earlier versions of the Game may also use <strong>Google Firebase</strong> (for example, Analytics and Remote Config), which collects device identifiers, app usage events and technical data. Firebase is being removed in updated versions. See <a href="https://firebase.google.com/support/privacy">firebase.google.com/support/privacy</a>.</p>""")
     s.append("<p>We do not collect precise (GPS) location, contacts, photos, microphone or camera data.</p>")
 
     s.append("""<h2>3. Why we process data (legal bases)</h2>
@@ -177,6 +179,8 @@ def text_ru(g):
         t = t[0].upper() + t[1:]
         s.append(f"<h3>2.6. {t}</h3>\n<p>{' '.join(other)}</p>")
 
+    s.append(f"""<h3>2.{7 if other else 6}. Более ранние версии Игры</h3>
+<p>Более ранние версии Игры могут также использовать <strong>Google Firebase</strong> (например, Analytics и Remote Config), который собирает идентификаторы устройства, события использования приложения и технические данные. В обновлённых версиях Firebase удаляется. Подробнее: <a href="https://firebase.google.com/support/privacy?hl=ru">firebase.google.com/support/privacy</a>.</p>""")
     s.append("<p>Мы не собираем точное местоположение (GPS), контакты, фото, данные микрофона и камеры.</p>")
 
     s.append("""<h2>3. Зачем мы обрабатываем данные (правовые основания)</h2>
