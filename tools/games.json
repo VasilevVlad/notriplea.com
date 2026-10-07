@@ -18,7 +18,8 @@
       "share": false,
       "tagline": "Viking action RPG",
       "googlePlay": null,
-      "appStore": "https://apps.apple.com/app/id6754191922"
+      "appStore": "https://apps.apple.com/app/id6754191922",
+      "tagline_ru": "Экшен-RPG про викингов"
     },
     {
       "slug": "glory-ages-samurais",
@@ -33,7 +34,8 @@
       "share": false,
       "tagline": "Samurai action RPG",
       "googlePlay": "https://play.google.com/store/apps/details?id=com.lalapp.gloryagessamurais",
-      "appStore": "https://apps.apple.com/app/id1440521281"
+      "appStore": "https://apps.apple.com/app/id1440521281",
+      "tagline_ru": "Экшен-RPG про самураев"
     },
     {
       "slug": "slash-of-sword-2",
@@ -48,7 +50,8 @@
       "share": true,
       "tagline": "Offline action RPG",
       "googlePlay": "https://play.google.com/store/apps/details?id=com.Notriplea.SlashOfSwordRebelliousJousting",
-      "appStore": "https://apps.apple.com/app/id1526820470"
+      "appStore": "https://apps.apple.com/app/id1526820470",
+      "tagline_ru": "Офлайн экшен-RPG"
     },
     {
       "slug": "a-way-to-smash",
@@ -63,7 +66,8 @@
       "share": false,
       "tagline": "Tactical fight",
       "googlePlay": "https://play.google.com/store/apps/details?id=com.notriplea.awaytosmash",
-      "appStore": "https://apps.apple.com/app/id6447623271"
+      "appStore": "https://apps.apple.com/app/id6447623271",
+      "tagline_ru": "Тактические бои"
     },
     {
       "slug": "a-way-to-slay",
@@ -78,7 +82,8 @@
       "share": false,
       "tagline": "Tactical puzzle fight",
       "googlePlay": "https://play.google.com/store/apps/details?id=com.lalapp.waytoslay",
-      "appStore": "https://apps.apple.com/app/id1416226967"
+      "appStore": "https://apps.apple.com/app/id1416226967",
+      "tagline_ru": "Тактические бои-головоломки"
     },
     {
       "slug": "slash-of-sword",
@@ -93,7 +98,8 @@
       "share": false,
       "tagline": "Arena fighting",
       "googlePlay": "https://play.google.com/store/apps/details?id=com.lalapp.slashofsword",
-      "appStore": "https://apps.apple.com/app/id1349721463"
+      "appStore": "https://apps.apple.com/app/id1349721463",
+      "tagline_ru": "Бои на арене"
     }
   ]
 }

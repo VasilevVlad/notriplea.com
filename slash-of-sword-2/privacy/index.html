@@ -7,6 +7,8 @@
 <meta name="description" content="Privacy Policy of the mobile game Slash of Sword 2 by NoTriple-A Games.">
 <meta name="theme-color" content="#0c0a09">
 <link rel="canonical" href="https://notriplea.com/slash-of-sword-2/privacy/">
+<link rel="alternate" hreflang="en" href="https://notriplea.com/slash-of-sword-2/privacy/">
+<link rel="alternate" hreflang="ru" href="https://notriplea.com/slash-of-sword-2/privacy/ru/">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23f97316'/%3E%3Cstop offset='1' stop-color='%23dc2626'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='16' fill='url(%23g)'/%3E%3Ctext x='32' y='44' font-family='Arial,sans-serif' font-size='34' font-weight='900' text-anchor='middle' fill='white'%3EN%3C/text%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NoTriple-A Games">
@@ -19,7 +21,7 @@
 <body>
 <header class="topbar"><div class="inner">
   <a class="brand" href="/"><span class="mark">N</span>NoTriple-A Games</a>
-  <nav><strong>English</strong> <a href="/slash-of-sword-2/privacy/ru/">Русский</a></nav>
+  <nav><span class="lang"><strong>EN</strong> <a href="/slash-of-sword-2/privacy/ru/" data-lang="ru">RU</a></span></nav>
 </div></header>
 
 <main class="doc">
@@ -112,5 +114,16 @@
   <span>© NoTriple-A Games</span>
   <span><a href="mailto:contact@notriplea.com">contact@notriplea.com</a></span>
 </footer>
+<script>
+(function(){
+  try {
+    document.querySelectorAll('[data-lang]').forEach(function(a){
+      a.addEventListener('click', function(){ localStorage.setItem('lang', a.getAttribute('data-lang')); });
+    });
+    if (location.pathname === '/' && !localStorage.getItem('lang') &&
+        /^ru|^uk|^be|^kk|^uz/i.test(navigator.language || '')) location.replace('/ru/');
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>

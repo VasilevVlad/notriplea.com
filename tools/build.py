@@ -250,14 +250,72 @@ FAVICON = "data:image/svg+xml," + (
     "text-anchor='middle' fill='white'%3EN%3C/text%3E%3C/svg%3E")
 
 
-def topbar(nav):
+LOGO = "assets/logo.png"  # если файл есть — в шапке логотип вместо буквы N
+
+UI = {
+    "en": {
+        "home": "/", "games": "Games", "contact": "Contact",
+        "eyebrow": "Indie mobile games studio",
+        "h1": "Brutal fights.<br><span>Epic heroes.</span>",
+        "lead": "We’re a small indie team making the games we love to play ourselves: Viking sagas, samurai duels and fights where every hit counts. Easy to pick up on your phone — hard to put down.",
+        "btn_games": "Our games", "btn_contact": "Get in touch",
+        "games_h": "Our games", "games_sub": "Free to play on Google Play and the App Store.",
+        "privacy": "Privacy Policy", "soon": "soon",
+        "contact_h": "Contact", "contact_sub": "Support, questions about your data, or just want to say hi — write to us.",
+        "title": "NoTriple-A Games — mobile action games",
+        "desc": "NoTriple-A Games is a small indie studio making action RPGs and tactical fighting games for Android and iOS.",
+        "icon_alt": "icon",
+    },
+    "ru": {
+        "home": "/ru/", "games": "Игры", "contact": "Контакты",
+        "eyebrow": "Инди-студия мобильных игр",
+        "h1": "Жёсткие бои.<br><span>Эпичные герои.</span>",
+        "lead": "Мы — небольшая инди-команда и делаем игры, в которые сами любим играть: саги о викингах, самурайские дуэли и бои, где важен каждый удар. Начать легко, оторваться — сложно.",
+        "btn_games": "Наши игры", "btn_contact": "Написать нам",
+        "games_h": "Наши игры", "games_sub": "Бесплатно в Google Play и App Store.",
+        "privacy": "Политика конфиденциальности", "soon": "скоро",
+        "contact_h": "Контакты", "contact_sub": "Поддержка, вопросы о данных или просто сказать привет — пишите.",
+        "title": "NoTriple-A Games — мобильные экшен-игры",
+        "desc": "NoTriple-A Games — небольшая инди-студия: экшен-RPG и тактические бои для Android и iOS.",
+        "icon_alt": "иконка",
+    },
+}
+
+# сохраняет выбор языка; на главной без выбора — русским отдаёт /ru/
+LANG_JS = """<script>
+(function(){
+  try {
+    document.querySelectorAll('[data-lang]').forEach(function(a){
+      a.addEventListener('click', function(){ localStorage.setItem('lang', a.getAttribute('data-lang')); });
+    });
+    if (location.pathname === '/' && !localStorage.getItem('lang') &&
+        /^ru|^uk|^be|^kk|^uz/i.test(navigator.language || '')) location.replace('/ru/');
+  } catch (e) {}
+})();
+</script>"""
+
+
+def brand():
+    if os.path.exists(os.path.join(ROOT, LOGO)):
+        return f'<img class="logo" src="/{LOGO}" alt="NoTriple-A Games">'
+    return '<span class="mark">N</span>NoTriple-A Games'
+
+
+def topbar(home, nav):
     return f"""<header class="topbar"><div class="inner">
-  <a class="brand" href="/"><span class="mark">N</span>NoTriple-A Games</a>
+  <a class="brand" href="{home}">{brand()}</a>
   <nav>{nav}</nav>
 </div></header>"""
 
 
-def page(lang, title, desc, nav, body, url, image="/assets/icons/glory-ages-vikings.jpg"):
+def lang_switch(lang, en_url, ru_url):
+    en = '<strong>EN</strong>' if lang == "en" else f'<a href="{en_url}" data-lang="en">EN</a>'
+    ru = '<strong>RU</strong>' if lang == "ru" else f'<a href="{ru_url}" data-lang="ru">RU</a>'
+    return f'<span class="lang">{en} {ru}</span>'
+
+
+def page(lang, title, desc, nav, body, url, alt_urls, image="/assets/icons/glory-ages-vikings.jpg"):
+    alts = "\n".join(f'<link rel="alternate" hreflang="{l}" href="{SITE}{u}">' for l, u in alt_urls.items())
     return f"""<!doctype html>
 <html lang="{lang}">
 <head>
@@ -267,6 +325,7 @@ def page(lang, title, desc, nav, body, url, image="/assets/icons/glory-ages-viki
 <meta name="description" content="{desc}">
 <meta name="theme-color" content="#0c0a09">
 <link rel="canonical" href="{SITE}{url}">
+{alts}
 <link rel="icon" href="{FAVICON}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NoTriple-A Games">
@@ -277,7 +336,7 @@ def page(lang, title, desc, nav, body, url, image="/assets/icons/glory-ages-viki
 <link rel="stylesheet" href="/style.css">
 </head>
 <body>
-{topbar(nav)}
+{topbar(UI[lang]["home"], nav)}
 
 {body}
 
@@ -285,6 +344,7 @@ def page(lang, title, desc, nav, body, url, image="/assets/icons/glory-ages-viki
   <span>© NoTriple-A Games</span>
   <span><a href="mailto:{EMAIL}">{EMAIL}</a></span>
 </footer>
+{LANG_JS}
 </body>
 </html>
 """
@@ -298,15 +358,19 @@ def write(rel, content):
     print("  ", rel)
 
 
-def store_buttons(g):
+def store_buttons(g, t):
     b = []
     if g.get("googlePlay"):
         b.append(f'<a class="store" href="{g["googlePlay"]}" target="_blank" rel="noopener">{ICON_PLAY}Google Play</a>')
     else:
-        b.append(f'<span class="store soon">{ICON_PLAY}Google Play — soon</span>')
+        b.append(f'<span class="store soon">{ICON_PLAY}Google Play — {t["soon"]}</span>')
     if g.get("appStore"):
         b.append(f'<a class="store" href="{g["appStore"]}" target="_blank" rel="noopener">{ICON_APPLE}App Store</a>')
     return "\n      ".join(b)
+
+
+def tagline(g, lang):
+    return g["tagline_ru"] if lang == "ru" else g["tagline"]
 
 
 def build():
@@ -316,51 +380,52 @@ def build():
         icon = f"/assets/icons/{g['slug']}.jpg"
         en_url = f"/{g['slug']}/privacy/"
         ru_url = f"/{g['slug']}/privacy/ru/"
-        chip = f'<div class="game-chip"><img src="{icon}" alt="" width="56" height="56"><div><strong>{name}</strong><br><span class="meta">{html.escape(g["tagline"])}</span></div></div>'
-        write(f"{g['slug']}/privacy/index.html", page(
-            "en", f"Privacy Policy — {name}",
-            f"Privacy Policy of the mobile game {name} by NoTriple-A Games.",
-            f'<strong>English</strong> <a href="{ru_url}">Русский</a>',
-            f'<main class="doc">\n{chip}\n<h1>Privacy Policy</h1>\n<p class="meta">Effective date: {eff["en"]}</p>\n\n' + text_en(g) + "\n</main>",
-            en_url, icon))
-        write(f"{g['slug']}/privacy/ru/index.html", page(
-            "ru", f"Политика конфиденциальности — {name}",
-            f"Политика конфиденциальности мобильной игры {name} от NoTriple-A Games.",
-            f'<a href="{en_url}">English</a> <strong>Русский</strong>',
-            f'<main class="doc">\n{chip}\n<h1>Политика конфиденциальности</h1>\n<p class="meta">Дата вступления в силу: {eff["ru"]}</p>\n\n' + text_ru(g) + "\n</main>",
-            ru_url, icon))
+        alts = {"en": en_url, "ru": ru_url}
+        for lang, rel, url, h1, eff_txt, text in (
+                ("en", f"{g['slug']}/privacy/index.html", en_url, "Privacy Policy", f"Effective date: {eff['en']}", text_en(g)),
+                ("ru", f"{g['slug']}/privacy/ru/index.html", ru_url, "Политика конфиденциальности", f"Дата вступления в силу: {eff['ru']}", text_ru(g))):
+            chip = f'<div class="game-chip"><img src="{icon}" alt="" width="56" height="56"><div><strong>{name}</strong><br><span class="meta">{html.escape(tagline(g, lang))}</span></div></div>'
+            desc = (f"Privacy Policy of the mobile game {name} by NoTriple-A Games." if lang == "en"
+                    else f"Политика конфиденциальности мобильной игры {name} от NoTriple-A Games.")
+            write(rel, page(lang, f"{h1} — {name}", desc, lang_switch(lang, en_url, ru_url),
+                            f'<main class="doc">\n{chip}\n<h1>{h1}</h1>\n<p class="meta">{eff_txt}</p>\n\n{text}\n</main>',
+                            url, alts, icon))
 
-    cards, mosaic = [], []
-    for g in CFG["games"]:
-        name = html.escape(g["name"])
-        icon = f"/assets/icons/{g['slug']}.jpg"
-        cards.append(f"""  <li class="game">
+    for lang in ("en", "ru"):
+        t = UI[lang]
+        cards, mosaic = [], []
+        for g in CFG["games"]:
+            name = html.escape(g["name"])
+            icon = f"/assets/icons/{g['slug']}.jpg"
+            pol = f"/{g['slug']}/privacy/" + ("ru/" if lang == "ru" else "")
+            cards.append(f"""  <li class="game">
     <div class="head">
-      <img class="icon" src="{icon}" alt="{name} icon" width="88" height="88" loading="lazy">
-      <div><h3>{name}</h3><p class="tag">{html.escape(g["tagline"])}</p></div>
+      <img class="icon" src="{icon}" alt="{name} — {t['icon_alt']}" width="88" height="88" loading="lazy">
+      <div><h3>{name}</h3><p class="tag">{html.escape(tagline(g, lang))}</p></div>
     </div>
     <div class="stores">
-      {store_buttons(g)}
+      {store_buttons(g, t)}
     </div>
-    <div class="legal">Privacy Policy: <a href="/{g['slug']}/privacy/">English</a> · <a href="/{g['slug']}/privacy/ru/">Русский</a></div>
+    <div class="legal"><a href="{pol}">{t['privacy']}</a></div>
   </li>""")
-    for _ in range(4):
-        mosaic += [f'<img src="/assets/icons/{g["slug"]}.jpg" alt="">' for g in CFG["games"]]
+        for _ in range(4):
+            mosaic += [f'<img src="/assets/icons/{g["slug"]}.jpg" alt="">' for g in CFG["games"]]
 
-    body = f"""<section class="hero">
+        home = t["home"]
+        body = f"""<section class="hero">
   <div class="mosaic" aria-hidden="true">{"".join(mosaic)}</div>
   <div class="content">
-    <p class="eyebrow">Indie mobile games studio</p>
-    <h1>Brutal fights.<br><span>Epic heroes.</span></h1>
-    <p class="lead">NoTriple-A Games makes action RPGs and tactical fighting games for Android and iOS — Vikings, samurai, swords and smashing.</p>
-    <a class="btn" href="#games">Our games</a>
-    <a class="btn ghost" href="#contact">Contact</a>
+    <p class="eyebrow">{t['eyebrow']}</p>
+    <h1>{t['h1']}</h1>
+    <p class="lead">{t['lead']}</p>
+    <a class="btn" href="#games">{t['btn_games']}</a>
+    <a class="btn ghost" href="#contact">{t['btn_contact']}</a>
   </div>
 </section>
 
 <section class="section" id="games">
-  <h2>Our games</h2>
-  <p class="sub">Free to play on Google Play and the App Store.</p>
+  <h2>{t['games_h']}</h2>
+  <p class="sub">{t['games_sub']}</p>
   <ul class="games">
 {chr(10).join(cards)}
   </ul>
@@ -368,8 +433,8 @@ def build():
 
 <section class="contact" id="contact">
   <div class="section">
-    <h2>Contact</h2>
-    <p class="sub">Support, privacy requests and business inquiries.</p>
+    <h2>{t['contact_h']}</h2>
+    <p class="sub">{t['contact_sub']}</p>
     <div class="links">
       <a class="btn" href="mailto:{EMAIL}">{EMAIL}</a>
       <a class="btn ghost" href="https://t.me/NoTripleA" target="_blank" rel="noopener">Telegram</a>
@@ -377,9 +442,9 @@ def build():
     </div>
   </div>
 </section>"""
-    write("index.html", page("en", "NoTriple-A Games — mobile action games",
-                             "NoTriple-A Games: action RPGs and tactical fighting games for Android and iOS.",
-                             '<a href="/#games">Games</a> <a href="/#contact">Contact</a>', body, "/"))
+        nav = f'<a href="{home}#games">{t["games"]}</a> <a href="{home}#contact">{t["contact"]}</a> ' + lang_switch(lang, "/", "/ru/")
+        write("index.html" if lang == "en" else "ru/index.html",
+              page(lang, t["title"], t["desc"], nav, body, home, {"en": "/", "ru": "/ru/", "x-default": "/"}))
 
 
 if __name__ == "__main__":
