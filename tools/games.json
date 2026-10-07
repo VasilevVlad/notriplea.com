@@ -1,0 +1,78 @@
+{
+  "effective": { "en": "7 October 2026", "ru": "7 октября 2026 г." },
+  "email": "contact@notriplea.com",
+  "games": [
+    {
+      "slug": "glory-ages-vikings",
+      "name": "Glory Ages - Vikings",
+      "android": "com.NoTripleA.GloryAgesVikings",
+      "ios": "com.notriplea.gloryagesvikings",
+      "yandexAds": false,
+      "playGames": false,
+      "analytics": "full",
+      "notifications": true,
+      "rating": true,
+      "share": false
+    },
+    {
+      "slug": "glory-ages-samurais",
+      "name": "Glory Ages - Samurais",
+      "android": "com.lalapp.gloryagessamurais",
+      "ios": "com.lalapp.gloryagessamurais",
+      "yandexAds": true,
+      "playGames": true,
+      "analytics": "full",
+      "notifications": true,
+      "rating": true,
+      "share": false
+    },
+    {
+      "slug": "slash-of-sword-2",
+      "name": "Slash of Sword 2",
+      "android": "com.Notriplea.SlashOfSwordRebelliousJousting",
+      "ios": "com.Notriplea.SlashOfSwordRebelliousJousting",
+      "yandexAds": true,
+      "playGames": true,
+      "analytics": "full",
+      "notifications": true,
+      "rating": false,
+      "share": true
+    },
+    {
+      "slug": "a-way-to-smash",
+      "name": "A Way To Smash",
+      "android": "com.notriplea.awaytosmash",
+      "ios": "com.notriplea.awaytosmash",
+      "yandexAds": true,
+      "playGames": true,
+      "analytics": "full",
+      "notifications": true,
+      "rating": true,
+      "share": false
+    },
+    {
+      "slug": "a-way-to-slay",
+      "name": "A Way To Slay",
+      "android": "com.lalapp.waytoslay",
+      "ios": "com.lalapp.waytoslay",
+      "yandexAds": true,
+      "playGames": true,
+      "analytics": "purchases",
+      "notifications": false,
+      "rating": false,
+      "share": false
+    },
+    {
+      "slug": "slash-of-sword",
+      "name": "Slash of Sword",
+      "android": "com.lalapp.slashofsword",
+      "ios": "",
+      "yandexAds": true,
+      "playGames": true,
+      "analytics": "purchases",
+      "notifications": false,
+      "rating": true,
+      "share": false
+    }
+  ]
+}
