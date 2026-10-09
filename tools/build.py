@@ -470,8 +470,9 @@ def build_app_ads():
             parts = [x.strip() for x in line.split(",")]
             if len(parts) < 3:
                 continue
-            parts[2] = parts[2].upper()
-            key = ",".join(p.lower() for p in parts[:3])
+            parts[0], parts[2] = parts[0].lower(), parts[2].upper()
+            # только точные дубли: сети (Яндекс) сверяют строку целиком, с регистром ID и cert-id
+            key = ", ".join(parts)
             if key in seen:
                 continue
             seen.add(key)
