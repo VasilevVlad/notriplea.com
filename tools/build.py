@@ -33,11 +33,16 @@ def text_en(g):
 
     s.append("<h2>2. What data is processed</h2>")
     if g["playGames"]:
-        acc = "If you are signed in to <strong>Google Play Games</strong> (Android) or <strong>Game Center</strong> (iOS), this player ID is linked to your Play Games or Game Center player ID so that your progress follows your account."
+        android = "<strong>Android:</strong> in <strong>Google Play Games</strong> saved games in your Google account, if you are signed in to Play Games; otherwise in <strong>Unity Gaming Services</strong> Cloud Save under an anonymous player ID created by Unity."
     else:
-        acc = "On iOS, if you are signed in to <strong>Game Center</strong>, this player ID is linked to your Game Center player ID so that your progress follows your account."
+        android = "<strong>Android:</strong> in <strong>Unity Gaming Services</strong> Cloud Save under an anonymous player ID created by Unity."
     s.append(f"""<h3>2.1. Game progress and cloud save</h3>
-<p>Your progress (levels, items, purchases made in the Game, settings) is stored on your device. To restore it after reinstalling or on a new device, the Game copies your save data to <strong>Unity Gaming Services</strong> (Authentication and Cloud Save). For this, Unity creates an anonymous player ID. {acc} We do not receive your Google or Apple email address or password.</p>""")
+<p>Your progress (levels, items, purchases made in the Game, settings) is stored on your device. To restore it after reinstalling or on a new device, the Game keeps a copy of your save data in the cloud:</p>
+<ul>
+  <li><strong>iOS:</strong> in your own private <strong>iCloud</strong> storage (Apple CloudKit), if you are signed in to iCloud. The copy is kept in your iCloud account; we cannot see or access it. You can delete it in iOS Settings → your name → iCloud → Manage Storage.</li>
+  <li>{android}</li>
+</ul>
+<p>The Game also signs in to <strong>Unity Gaming Services</strong> with an anonymous player ID to receive game settings (Remote Config) and, once, to move a save made by an older version of the Game from Unity Cloud Save. On iOS, if you are signed in to <strong>Game Center</strong>, the Game uses it for your player profile. We do not receive your Google or Apple email address or password.</p>""")
 
     if g["analytics"] == "full":
         an = "We use <strong>AppMetrica</strong> (by Yandex) to understand how the Game is played and to fix problems. AppMetrica collects: device model, operating system and its version, language, screen size, app version, device and installation identifiers (including the advertising ID where permitted), approximate location (country, city) derived from the IP address, and in-game events such as starting and finishing levels, in-game purchases, ad views and purchases."
@@ -95,7 +100,7 @@ def text_en(g):
     links = ["  <li>Google AdMob, Google Play" + (", Google Play Games" if g["playGames"] else "") + ' — <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>',
              '  <li>Unity Ads, Unity LevelPlay, Unity Gaming Services — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">unity.com/legal/game-player-and-app-user-privacy-policy</a></li>',
              "  <li>" + ("Yandex Ads, AppMetrica" if g["yandexAds"] else "AppMetrica") + ' — <a href="https://yandex.com/legal/confidential/">yandex.com/legal/confidential</a></li>',
-             '  <li>Apple App Store, Game Center — <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a></li>']
+             '  <li>Apple App Store, Game Center, iCloud — <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a></li>']
     s.append("<h2>5. Third-party services</h2>\n<p>Each service processes data under its own privacy policy:</p>\n<ul>\n" + "\n".join(links) + """
 </ul>
 <p>We do not sell your personal data for money. Sharing device identifiers with ad networks for personalized advertising may be considered “sharing” or a “sale” under some US state laws; you can opt out as described in section 4.</p>""")
@@ -106,7 +111,8 @@ def text_en(g):
     s.append("""<h2>7. How long data is kept</h2>
 <ul>
   <li>Save data on your device — until you delete the Game.</li>
-  <li>Cloud save — until you ask us to delete it (section 8), or until the Game’s cloud service is shut down.</li>
+  <li>Cloud save in iCloud (iOS) and in Google Play Games (Android) — in your account until you delete it there.</li>
+  <li>Cloud save in Unity Cloud Save — until you ask us to delete it (section 8), or until the Game’s cloud service is shut down.</li>
   <li>Analytics and advertising data — according to the retention periods of AppMetrica and the ad networks (see their policies).</li>
 </ul>""")
 
@@ -142,11 +148,16 @@ def text_ru(g):
 
     s.append("<h2>2. Какие данные обрабатываются</h2>")
     if g["playGames"]:
-        acc = "Если вы вошли в <strong>Google Play Игры</strong> (Android) или <strong>Game Center</strong> (iOS), этот ID связывается с вашим ID игрока Play Игр или Game Center, чтобы прогресс был привязан к аккаунту."
+        android = "<strong>Android:</strong> в сохранениях <strong>Google Play Игр</strong> в вашем аккаунте Google, если вы вошли в Play Игры; иначе — в <strong>Unity Gaming Services</strong> (Cloud Save) под анонимным ID игрока, который создаёт Unity."
     else:
-        acc = "На iOS, если вы вошли в <strong>Game Center</strong>, этот ID связывается с вашим ID игрока Game Center, чтобы прогресс был привязан к аккаунту."
+        android = "<strong>Android:</strong> в <strong>Unity Gaming Services</strong> (Cloud Save) под анонимным ID игрока, который создаёт Unity."
     s.append(f"""<h3>2.1. Прогресс и облачное сохранение</h3>
-<p>Прогресс (уровни, предметы, покупки в Игре, настройки) хранится на устройстве. Чтобы восстановить его после переустановки или на новом устройстве, Игра копирует сохранение в <strong>Unity Gaming Services</strong> (Authentication и Cloud Save). Для этого Unity создаёт анонимный ID игрока. {acc} Ваш адрес почты Google или Apple и пароль мы не получаем.</p>""")
+<p>Прогресс (уровни, предметы, покупки в Игре, настройки) хранится на устройстве. Чтобы восстановить его после переустановки или на новом устройстве, Игра хранит копию сохранения в облаке:</p>
+<ul>
+  <li><strong>iOS:</strong> в вашем личном хранилище <strong>iCloud</strong> (Apple CloudKit), если вы вошли в iCloud. Копия лежит в вашем аккаунте iCloud, мы её не видим и доступа к ней не имеем. Удалить её можно в Настройках iOS → ваше имя → iCloud → Управление хранилищем.</li>
+  <li>{android}</li>
+</ul>
+<p>Игра также входит в <strong>Unity Gaming Services</strong> под анонимным ID игрока, чтобы получать настройки игры (Remote Config) и один раз перенести сохранение старой версии Игры из Unity Cloud Save. На iOS, если вы вошли в <strong>Game Center</strong>, Игра использует его для профиля игрока. Ваш адрес почты Google или Apple и пароль мы не получаем.</p>""")
 
     if g["analytics"] == "full":
         an = "Мы используем <strong>AppMetrica</strong> (Яндекс), чтобы понимать, как играют в Игру, и исправлять ошибки. AppMetrica собирает: модель устройства, операционную систему и её версию, язык, размер экрана, версию Игры, идентификаторы устройства и установки (в том числе рекламный ID, где это разрешено), примерное местоположение (страна, город) по IP-адресу, а также события в Игре: начало и прохождение уровней, внутриигровые покупки, просмотры рекламы и покупки."
@@ -203,7 +214,7 @@ def text_ru(g):
     links = ["  <li>Google AdMob, Google Play" + (", Google Play Игры" if g["playGames"] else "") + ' — <a href="https://policies.google.com/privacy?hl=ru">policies.google.com/privacy</a></li>',
              '  <li>Unity Ads, Unity LevelPlay, Unity Gaming Services — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">unity.com/legal/game-player-and-app-user-privacy-policy</a></li>',
              "  <li>" + ("Яндекс Реклама, AppMetrica" if g["yandexAds"] else "AppMetrica") + ' — <a href="https://yandex.ru/legal/confidential/">yandex.ru/legal/confidential</a></li>',
-             '  <li>Apple App Store, Game Center — <a href="https://www.apple.com/ru/legal/privacy/">apple.com/legal/privacy</a></li>']
+             '  <li>Apple App Store, Game Center, iCloud — <a href="https://www.apple.com/ru/legal/privacy/">apple.com/legal/privacy</a></li>']
     s.append("<h2>5. Сторонние сервисы</h2>\n<p>Каждый сервис обрабатывает данные по своей политике:</p>\n<ul>\n" + "\n".join(links) + """
 </ul>
 <p>Мы не продаём персональные данные за деньги. Передача идентификаторов устройства рекламным сетям для персонализированной рекламы по законам некоторых штатов США может считаться «передачей» или «продажей»; отказаться от неё можно способами из раздела 4.</p>""")
@@ -214,7 +225,8 @@ def text_ru(g):
     s.append("""<h2>7. Сколько хранятся данные</h2>
 <ul>
   <li>Сохранение на устройстве — пока вы не удалите Игру.</li>
-  <li>Облачное сохранение — пока вы не попросите его удалить (раздел 8) или пока работает облачный сервис Игры.</li>
+  <li>Облачное сохранение в iCloud (iOS) и в Google Play Играх (Android) — в вашем аккаунте, пока вы не удалите его там.</li>
+  <li>Облачное сохранение в Unity Cloud Save — пока вы не попросите его удалить (раздел 8) или пока работает облачный сервис Игры.</li>
   <li>Данные аналитики и рекламы — по срокам AppMetrica и рекламных сетей (см. их политики).</li>
 </ul>""")
 

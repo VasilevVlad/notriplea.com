@@ -27,7 +27,7 @@
 <main class="doc">
 <div class="game-chip"><img src="/assets/icons/a-way-to-slay.jpg" alt="" width="56" height="56"><div><strong>A Way To Slay</strong><br><span class="meta">Tactical puzzle fight</span></div></div>
 <h1>Privacy Policy</h1>
-<p class="meta">Effective date: 7 October 2026</p>
+<p class="meta">Effective date: 26 October 2026</p>
 
 <div class="card">
 <p><strong>In short.</strong> We do not ask for your name, email or phone number, and we never see your payment card. The game uses services from Google, Apple, Unity and Yandex to show ads, measure purchases and ad revenue, process purchases and keep your progress in the cloud. These services receive device identifiers and technical data. You can limit personalized ads at any time, and you can ask us to delete your data.</p>
@@ -39,7 +39,12 @@
 <h2>2. What data is processed</h2>
 
 <h3>2.1. Game progress and cloud save</h3>
-<p>Your progress (levels, items, purchases made in the Game, settings) is stored on your device. To restore it after reinstalling or on a new device, the Game copies your save data to <strong>Unity Gaming Services</strong> (Authentication and Cloud Save). For this, Unity creates an anonymous player ID. If you are signed in to <strong>Google Play Games</strong> (Android) or <strong>Game Center</strong> (iOS), this player ID is linked to your Play Games or Game Center player ID so that your progress follows your account. We do not receive your Google or Apple email address or password.</p>
+<p>Your progress (levels, items, purchases made in the Game, settings) is stored on your device. To restore it after reinstalling or on a new device, the Game keeps a copy of your save data in the cloud:</p>
+<ul>
+  <li><strong>iOS:</strong> in your own private <strong>iCloud</strong> storage (Apple CloudKit), if you are signed in to iCloud. The copy is kept in your iCloud account; we cannot see or access it. You can delete it in iOS Settings → your name → iCloud → Manage Storage.</li>
+  <li><strong>Android:</strong> in <strong>Google Play Games</strong> saved games in your Google account, if you are signed in to Play Games; otherwise in <strong>Unity Gaming Services</strong> Cloud Save under an anonymous player ID created by Unity.</li>
+</ul>
+<p>The Game also signs in to <strong>Unity Gaming Services</strong> with an anonymous player ID to receive game settings (Remote Config) and, once, to move a save made by an older version of the Game from Unity Cloud Save. On iOS, if you are signed in to <strong>Game Center</strong>, the Game uses it for your player profile. We do not receive your Google or Apple email address or password.</p>
 
 <h3>2.2. Analytics</h3>
 <p>We use <strong>AppMetrica</strong> (by Yandex) only to count purchases and ad revenue. AppMetrica collects: device model, operating system and its version, language, app version, device and installation identifiers (including the advertising ID where permitted), approximate location (country, city) derived from the IP address, purchase events and ad impressions with their revenue. Gameplay events are not sent.</p>
@@ -78,7 +83,7 @@
   <li>Google AdMob, Google Play, Google Play Games — <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></li>
   <li>Unity Ads, Unity LevelPlay, Unity Gaming Services — <a href="https://unity.com/legal/game-player-and-app-user-privacy-policy">unity.com/legal/game-player-and-app-user-privacy-policy</a></li>
   <li>Yandex Ads, AppMetrica — <a href="https://yandex.com/legal/confidential/">yandex.com/legal/confidential</a></li>
-  <li>Apple App Store, Game Center — <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a></li>
+  <li>Apple App Store, Game Center, iCloud — <a href="https://www.apple.com/legal/privacy/">apple.com/legal/privacy</a></li>
 </ul>
 <p>We do not sell your personal data for money. Sharing device identifiers with ad networks for personalized advertising may be considered “sharing” or a “sale” under some US state laws; you can opt out as described in section 4.</p>
 
@@ -88,7 +93,8 @@
 <h2>7. How long data is kept</h2>
 <ul>
   <li>Save data on your device — until you delete the Game.</li>
-  <li>Cloud save — until you ask us to delete it (section 8), or until the Game’s cloud service is shut down.</li>
+  <li>Cloud save in iCloud (iOS) and in Google Play Games (Android) — in your account until you delete it there.</li>
+  <li>Cloud save in Unity Cloud Save — until you ask us to delete it (section 8), or until the Game’s cloud service is shut down.</li>
   <li>Analytics and advertising data — according to the retention periods of AppMetrica and the ad networks (see their policies).</li>
 </ul>
 
