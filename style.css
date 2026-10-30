@@ -73,9 +73,11 @@ img { display: block; max-width: 100%; }
   display: inline-flex; align-items: center; gap: 8px;
   padding: 12px 20px; border-radius: 999px; font-weight: 700; font-size: 15px;
   background: linear-gradient(135deg, var(--accent), var(--accent-2)); color: #fff;
+  transition: background-color 0.18s ease, box-shadow 0.18s ease;
 }
-.btn:hover { text-decoration: none; filter: brightness(1.08); }
+.btn:hover { text-decoration: none; filter: brightness(1.2); box-shadow: 0 0 0 2px #ffb36b, 0 0 20px rgba(249, 115, 22, 0.4); }
 .btn.ghost { background: transparent; border: 1px solid var(--line); color: var(--text); }
+.btn.ghost:hover { background: #492511; border-color: var(--accent); color: #fff; }
 
 /* ---------- секции ---------- */
 .section { max-width: var(--max); margin: 0 auto; padding: 64px 16px; }
@@ -99,8 +101,10 @@ img { display: block; max-width: 100%; }
   display: inline-flex; align-items: center; gap: 8px;
   padding: 8px 14px; border-radius: 12px; font-size: 14px; font-weight: 600;
   background: #000; border: 1px solid #3a302a; color: #fff;
+  transition: background-color 0.18s ease, border-color 0.18s ease, box-shadow 0.18s ease;
 }
-.store:hover { text-decoration: none; border-color: var(--accent); }
+.store:not(.soon):hover { text-decoration: none; background: #492511; border-color: #ffb36b; box-shadow: 0 0 0 1px var(--accent), 0 0 16px rgba(249, 115, 22, 0.3); }
+.btn:focus-visible, .store:focus-visible, .topbar .lang a:focus-visible { outline: 2px solid #ffb36b; outline-offset: 4px; }
 .store svg { width: 18px; height: 18px; fill: currentColor; }
 .store.soon { color: var(--muted); background: transparent; border-style: dashed; cursor: default; }
 .game .legal { font-size: 13px; color: var(--muted); margin-top: auto; padding-top: 12px; border-top: 1px solid var(--line); }
@@ -145,6 +149,7 @@ footer.site a { color: var(--muted); }
 .topbar nav { align-items: center; }
 .topbar .lang { display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--line); border-radius: 999px; font-size: 13px; font-weight: 700; }
 .topbar .lang a, .topbar .lang strong { padding: 3px 9px; border-radius: 999px; }
+.topbar .lang a:hover { background: #492511; color: #fff; box-shadow: inset 0 0 0 1px var(--accent); text-decoration: none; }
 .topbar .lang strong { background: var(--card-hover); color: var(--text); }
 .brand { white-space: nowrap; }
 @media (max-width: 560px) { .brand { font-size: 15px; } .topbar nav > a { display: none; } }
